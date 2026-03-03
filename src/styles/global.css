@@ -20,7 +20,24 @@
   transform: translateY(0);
 }
 
-/* Ensure smooth scrolling across the page */
-html {
-  scroll-behavior: smooth;
+/* Ensure smooth scrolling across the page - handled by Lenis now */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }

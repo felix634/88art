@@ -1,15 +1,41 @@
 <section id="welcome" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/images/hero-bg.jpg');">
+    <div class="hero-bg absolute inset-0 bg-cover bg-center" style="background-image: url('/images/hero-bg.jpg');">
         <div class="absolute inset-0 bg-primary-dark opacity-70"></div>
     </div>
 
-    <div class="relative z-10 p-6 max-w-4xl" data-aos>
-        <p class="text-accent-fire text-lg sm:text-xl font-body mb-4 tracking-widest uppercase">Üdvözlünk</p>
-        <h2 class="text-white text-5xl sm:text-7xl lg:text-8xl font-title font-bold leading-tight tracking-tighter uppercase">
+    <div class="relative z-10 p-6 max-w-4xl">
+        <p class="hero-subtext text-accent-fire text-lg sm:text-xl font-body mb-4 tracking-widest uppercase opacity-0">Üdvözlünk</p>
+        <h2 class="hero-title text-white text-5xl sm:text-7xl lg:text-8xl font-title font-bold leading-tight tracking-tighter uppercase opacity-0">
             A 88 Art<br>Tattoo Stúdióban.
         </h2>
-        <a href="#about" class="mt-8 inline-block px-8 py-3 bg-accent-neon text-primary-dark font-bold text-lg rounded-sm shadow-lg hover:bg-opacity-90 transition duration-300 uppercase tracking-wider">
+        <a href="#about" class="hero-btn mt-8 inline-block px-8 py-3 bg-accent-neon text-primary-dark font-bold text-lg rounded-sm shadow-lg hover:bg-opacity-90 transition duration-300 uppercase tracking-wider opacity-0">
             Engedje szabadjára a fantáziáját.
         </a>
     </div>
 </section>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Parallax background
+    gsap.to('.hero-bg', {
+        yPercent: 30,
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '#welcome',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true
+        }
+    });
+
+    // Staggered reveal for hero content
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.2 }});
+    
+    tl.to('.hero-subtext', { opacity: 1, y: -20, delay: 0.5 })
+      .to('.hero-title', { opacity: 1, y: -20 }, '-=0.8')
+      .to('.hero-btn', { opacity: 1, y: -10 }, '-=0.6');
+</script>
